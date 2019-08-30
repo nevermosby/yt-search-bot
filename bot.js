@@ -13,9 +13,11 @@ bot.telegram.getMe().then((bot_informations) => {
 // Usage: @yourbot channel. Retrieves: a list of last videos of 'channel' query input.
 bot.on('inline_query', ctx => {
     let nickname = ctx.update.inline_query.query;  // Take the nickname out of Telegraf context structure.
+    console.log("nickname is " + nickname)
     if(nickname.length > 3){  // If user input is longer than 3 characters
         // Search channel based on nickname. If there is one with same user query, let's retrieve its channel ID.
         youtube.get_id_from_nickname(nickname).then(channel_id => {
+            console.log("channel_id is " +channel_id)
             // Let's get last uploaded videos as data structure through YouTube API (thanks to our written model).
             youtube.fetch_channel_uploads(channel_id).then(structured_data => {
                 // Let's parse those structured data to get only essential informations for video listing.
