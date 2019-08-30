@@ -8,6 +8,7 @@ function YouTube(){
         return new Promise((resolve, reject) => {
             request(yt_api_auth("search?maxResults="+maxResults+"&part="+part+"&q="+query+"&type="+type), function(error, response, body){
                 let parsed_body = JSON.parse(body);
+                console.log("youtube svc return: "+ parsed_body)
                 if(parsed_body.pageInfo.totalResults > 0)   resolve(parsed_body);
                 else                                        reject("Error: no results from the search.");
             });
